@@ -66,29 +66,31 @@ L’interface UserRepository permet d’accéder aux données de l’entité Use
 
 ## 🛠️ Services
 ### -  Interface `UserService`:
-L’interface UserService définit les opérations métiers (logiques de service) liées à la gestion des utilisateurs (User) et des rôles (Role). Elle agit comme une couche d’abstraction entre le contrôleur et la couche de persistance (les repositories). En définissant cette interface, on assure une séparation claire des responsabilités, ce qui facilite la maintenance, le test unitaire et l’extensibilité de l’application. 
-  - Les méthodes déclarées dans UserService couvrent les principales opérations nécessaires à la gestion des utilisateurs et de leurs rôles :
-       - addNewUser(User user) permet d’ajouter un nouvel utilisateur dans le système.
-       - addNewRole(Role role) permet d’ajouter un nouveau rôle.
-       - findUserByUserName(String userName) recherche un utilisateur à partir de son nom d’utilisateur.
-       - findRoleByRoleName(String roleName) permet de retrouver un rôle à partir de son nom.
-       - addRoleToUser(String username, String roleName) permet d’assigner un rôle spécifique à un utilisateur donné.
+L’interface UserService définit les opérations métiers (logiques de service) liées à la gestion des utilisateurs (User) et des rôles (Role). Elle représente une couche d’abstraction entre les contrôleurs (qui gèrent les requêtes HTTP) et la couche de persistance (les repositories). Cette organisation respecte le principe de séparation des responsabilités, ce qui facilite la maintenance, les tests et l’évolutivité de l’application.  
+ - Voici les méthodes déclarées dans l’interface UserService :
+    - addNewUser(User user) : ajoute un nouvel utilisateur au système.
+    - addNewRole(Role role) : ajoute un nouveau rôle.
+    - findUserByUserName(String userName) : recherche un utilisateur selon son nom d'utilisateur.
+    - findRoleByRoleName(String roleName) : recherche un rôle selon son nom.
+    - addRoleToUser(String username, String roleName) : assigne un rôle donné à un utilisateur spécifique.
+    - authenticate(String userName, String password) : authentifie un utilisateur en vérifiant son nom d'utilisateur et son mot de passe.
 
-En créant cette interface, on laisse la liberté d’implémenter ces méthodes dans différentes classes selon les besoins, tout en garantissant que les signatures des méthodes restent cohérentes dans tout le projet.
-  ![Texte alternatif](userservice.JPG) 
+Cette interface permet d'assurer une cohérence dans les signatures des méthodes, indépendamment de leur implémentation concrète, ce qui est essentiel pour garantir une architecture solide.
+  ![Texte alternatif](serviceuser.JPG) 
 ###  - Implémentation `UserServiceImpl`:  
-La classe UserServiceImpl est l’implémentation concrète de l’interface UserService définie précédemment. Annotée avec @Service, elle est automatiquement détectée par Spring comme un composant de service, ce qui permet de l’injecter dans d’autres parties de l’application. L’annotation @Transactional garantit que toutes les opérations réalisées dans ses méthodes sont exécutées dans une seule transaction, ce qui évite les incohérences de données en cas d’erreur pendant l'exécution.  
+La classe UserServiceImpl est l’implémentation concrète de l’interface UserService. Annotée avec @Service, elle est automatiquement détectée comme un composant métier par Spring, ce qui permet son injection dans d'autres composants. L’annotation @Transactional garantit que toutes les opérations effectuées dans ses méthodes s'exécutent dans le cadre d'une transaction unique, assurant ainsi la cohérence des données.  
+La classe utilise l’annotation @AllArgsConstructor de Lombok pour injecter automatiquement les dépendances nécessaires (UserRepository et RoleRepository) via le constructeur.
+ - Voici les principales méthodes de cette classe :
+     - addNewUser(User user) : génère un identifiant unique (UUID) pour le nouvel utilisateur avant de l'enregistrer.
+     - addNewRole(Role role) : enregistre un nouveau rôle dans la base de données.
+     - findUserByUserName(String userName) / findRoleByRoleName(String roleName) : recherchent respectivement un utilisateur ou un rôle à partir de leur nom.
+     - addRoleToUser(String username, String roleName) : établit une relation bidirectionnelle entre un utilisateur et un rôle en les ajoutant mutuellement dans leurs listes respectives.
+     - authenticate(String userName, String password) : vérifie les identifiants d’un utilisateur. En cas d’échec, une exception est levée avec un message d’erreur "Bad credentials".
 
-Cette classe repose sur deux dépendances injectées via le constructeur grâce à @AllArgsConstructor de Lombok : UserRepository et RoleRepository. Ces deux objets permettent d’interagir avec la base de données pour effectuer les opérations liées aux entités User et Role.  
- - Les méthodes principales sont :
-    - addNewUser(User user) : crée un nouvel utilisateur avec un identifiant unique généré automatiquement (UUID) avant de l’enregistrer dans la base.
-    - addNewRole(Role role) : enregistre un nouveau rôle dans la base de données.
-    - findUserByUserName(String userName) et findRoleByRoleName(String roleName) : permettent de rechercher respectivement un utilisateur ou un rôle à partir de leur nom.
-    - addRoleToUser(String username, String roleName) : attribue un rôle à un utilisateur en ajoutant le rôle dans la liste des rôles de l’utilisateur, et l’utilisateur dans la liste des utilisateurs du rôle (relation bidirectionnelle).
-
-Ainsi, UserServiceImpl encapsule la logique métier de gestion des utilisateurs et des rôles tout en déléguant l’accès aux données aux repositories.
-  ![Texte alternatif](userservice1.JPG) 
-  ![Texte alternatif](userservice2.JPG) 
+Ainsi, UserServiceImpl regroupe la logique métier de gestion des utilisateurs et des rôles, tout en déléguant les accès aux données aux repositories. Elle incarne la couche service typique dans une architecture Spring Boot bien structurée.
+  ![Texte alternatif](userserviceImpl1.JPG) 
+  ![Texte alternatif](userserviceImpl2.JPG) 
+  ![Texte alternatif](userserviceImpl3.JPG) 
 
 ## --  Classe Principale `JpaWiaApplication`:
 Cette classe représente le point d'entrée principal de l'application Spring Boot. Annotée avec @SpringBootApplication, elle configure automatiquement tous les composants nécessaires au démarrage de l'application. La méthode main() lance l'application grâce à SpringApplication.run(). En plus de cela, la méthode start() annotée avec @Bean retourne un CommandLineRunner, une interface permettant d'exécuter du code automatiquement au démarrage de l'application. À l’intérieur de cette méthode, on crée deux utilisateurs (user1 et admin) avec des mots de passe, puis on crée trois rôles (STUDENT, USER, ADMIN) à l’aide du service UserService. Ensuite, des rôles sont assignés aux utilisateurs : user1 reçoit les rôles STUDENT et USER, tandis que admin reçoit les rôles USER et ADMIN. Ce code permet donc d'initialiser automatiquement des données de test dès le lancement de l’application, ce qui est très utile pour les phases de développement.
