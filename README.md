@@ -98,13 +98,14 @@ Ce fichier application.properties contient les paramètres de configuration de l
     ![Texte alternatif](configuration.JPG) 
 
 
-
-
   - Résultat Attendu
 Au lancement de l’application :
     - Les utilisateurs et rôles sont insérés automatiquement.
     - Les relations entre utilisateurs et rôles sont établies.
     - On peut visualiser les tables via l’interface H2 (/h2-console), avec le JDBC URL jdbc:h2:mem:users_db.
 
+
+ ## - Conclusion
+Ce TP m'a permis de réaliser une application simple mais complète de gestion des utilisateurs et des rôles avec Spring Boot, JPA et une base de données MySQL.Les fonctionnalités essentielles de création, recherche, et association entre utilisateurs et rôles ont été implémentées avec succès.
 
 
