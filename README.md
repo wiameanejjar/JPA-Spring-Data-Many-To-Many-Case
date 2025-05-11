@@ -120,10 +120,16 @@ Au lancement de l’application :
     - Les utilisateurs et rôles sont insérés automatiquement.
     - Les relations entre utilisateurs et rôles sont établies.
     - On peut visualiser les tables via l’interface H2 (/h2-console), avec le JDBC URL jdbc:h2:mem:users_db.
-     ![Texte alternatif](configuration.JPG)
+     ![Texte alternatif](resultat.JPG)
+  - Déscription:
+Lors de l'exécution de l'application JpaFsApplication, les données d'initialisation définies dans la méthode start() ont été correctement créées et enregistrées. L'utilisateur user1 a été authentifié avec succès, et les rôles qui lui ont été attribués (STUDENT et USER) ont été affichés dans la console, confirmant ainsi que la logique d’ajout d’utilisateurs, d’attribution de rôles et d’authentification fonctionne comme prévu.
+
+## Problème rencontré: 
+je voulais également vous informer que j’ai rencontré un problème sur mon PC concernant l’utilisation de XAMPP/WampServer. J’ai essayé à plusieurs reprises de le résoudre, mais je n’ai pas encore trouvé de solution définitive. Toutefois, je continue à chercher activement une solution afin de pouvoir avancer sur les prochains projets.
 
 
  ## - Conclusion
 Ce TP m'a permis de réaliser une application simple mais complète de gestion des utilisateurs et des rôles avec Spring Boot, JPA et une base de données MySQL.Les fonctionnalités essentielles de création, recherche, et association entre utilisateurs et rôles ont été implémentées avec succès.
 
-
+Auteur :
+Anejjar Wiame
