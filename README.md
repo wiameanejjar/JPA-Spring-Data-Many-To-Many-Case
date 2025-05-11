@@ -58,6 +58,16 @@ Le paramètre User indique l’entité ciblée, et String est le type de sa clé
 
 ## 🛠️ Services
 ### -  Interface `UserService`:
+L’interface UserService définit les opérations métiers (logiques de service) liées à la gestion des utilisateurs (User) et des rôles (Role). Elle agit comme une couche d’abstraction entre le contrôleur et la couche de persistance (les repositories). En définissant cette interface, on assure une séparation claire des responsabilités, ce qui facilite la maintenance, le test unitaire et l’extensibilité de l’application. 
+  - Les méthodes déclarées dans UserService couvrent les principales opérations nécessaires à la gestion des utilisateurs et de leurs rôles :
+       - addNewUser(User user) permet d’ajouter un nouvel utilisateur dans le système.
+       - addNewRole(Role role) permet d’ajouter un nouveau rôle.
+       - findUserByUserName(String userName) recherche un utilisateur à partir de son nom d’utilisateur.
+       - findRoleByRoleName(String roleName) permet de retrouver un rôle à partir de son nom.
+       - addRoleToUser(String username, String roleName) permet d’assigner un rôle spécifique à un utilisateur donné.
+
+En créant cette interface, on laisse la liberté d’implémenter ces méthodes dans différentes classes selon les besoins, tout en garantissant que les signatures des méthodes restent cohérentes dans tout le projet.
+  ![Texte alternatif](userservice.JPG) 
 
 
 
