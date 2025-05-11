@@ -60,11 +60,9 @@ Spring Data JPA est capable de générer automatiquement l'implémentation de ce
 
   ![Texte alternatif](repositoryrole.JPG) 
 
-### -  `UserRepository` :
-La classe `UserRepository` est une interface qui permet d’accéder aux données de l’entité User en interagissant avec la base de données. Elle étend JpaRepository<User, String>, ce qui signifie qu’elle hérite automatiquement de plusieurs méthodes prédéfinies comme save(), findAll(), findById(), deleteById(), etc., sans avoir besoin de les implémenter manuellement. Cela simplifie grandement la gestion des opérations CRUD (Créer, Lire, Mettre à jour, Supprimer) sur les utilisateurs.  
-
-Le paramètre User indique l’entité ciblée, et String est le type de sa clé primaire (userId dans la classe User). L’interface ne porte pas d’annotation explicite comme @Repository, mais Spring détecte automatiquement les interfaces qui étendent JpaRepository et les prend en charge comme composants de persistance. L’interface déclare une méthode personnalisée findByUserName(String userName), qui permet de rechercher un utilisateur en fonction de son nom d'utilisateur. Spring Data JPA se base sur le nom de cette méthode pour en générer automatiquement l'implémentation.
-  ![Texte alternatif](userrepository.JPG) 
+### - Interface `UserRepository` :
+L’interface UserRepository permet d’accéder aux données de l’entité User en interagissant avec la base de données. Elle étend JpaRepository<User, String>, ce qui lui donne accès à toutes les méthodes CRUD de base sans avoir besoin de les implémenter. Le paramètre User désigne l’entité gérée, et String est le type de sa clé primaire (userId). Bien qu’elle ne soit pas annotée avec @Repository, Spring reconnaît automatiquement cette interface comme un composant de persistance grâce à l’extension de JpaRepository. Elle déclare également une méthode personnalisée findByUserName(String userName), qui permet de retrouver un utilisateur à partir de son nom d’utilisateur. Spring Data JPA génère automatiquement son implémentation en se basant sur le nom de la méthode.
+  ![Texte alternatif](repositoryuser.JPG) 
 
 ## 🛠️ Services
 ### -  Interface `UserService`:
