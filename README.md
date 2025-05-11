@@ -43,5 +43,10 @@ La relation entre les utilisateurs et les rôles est modélisée à l’aide de 
 
 La relation entre les rôles et les utilisateurs est définie par l’annotation @ManyToMany(fetch = FetchType.EAGER), ce qui indique qu’un rôle peut être attribué à plusieurs utilisateurs et qu’un utilisateur peut avoir plusieurs rôles. Le paramètre fetch = FetchType.EAGER permet de charger immédiatement les utilisateurs liés à un rôle, lors de la récupération du rôle depuis la base. Par défaut, cette relation bidirectionnelle est matérialisée sans @JoinTable, donc JPA gère la table intermédiaire automatiquement.
   ![Texte alternatif](roleclass.JPG) 
+## 🗂️ Repositories
+###  `UserRepository`:  
+Cette classe `UserRepository` est une interface qui permet d’accéder aux données de l’entité Role en interagissant avec la base de données. Elle étend JpaRepository<Role, Long>, ce qui signifie qu’elle hérite automatiquement de plusieurs méthodes prédéfinies comme save(), findAll(), findById(), deleteById(), etc., sans avoir besoin de les réécrire. Cela simplifie énormément la gestion des opérations CRUD (Créer, Lire, Mettre à jour, Supprimer).  
+Le paramètre Role indique l’entité ciblée, et Long est le type de sa clé primaire (id dans la classe Role). Grâce à l’annotation @Repository, Spring détecte cette interface comme un composant de persistance et s’en sert pour injecter les dépendances dans les services. Des méthodes héritées de JpaRepository, l’interface déclare une méthode personnalisée findByRoleName(String roleName). Cette méthode permet de rechercher un rôle spécifique en fonction de son nom (roleName). Spring Data JPA est capable de générer automatiquement l'implémentation de cette méthode en se basant sur son nom, ce qui évite d’écrire manuellement des requêtes SQL.
 
+  ![Texte alternatif](rolerepository.JPG) 
 
