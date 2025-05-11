@@ -20,7 +20,7 @@ Le projet est structuré selon les bonnes pratiques de Spring Boot :
 - service: interface et implémentation des services métier.  
 - Classe principale : JpaFsApplication.
   
-  ![img](structure.JPG)
+  ![img](new.JPG)
 ## 📄 Explication détaillée des Classes
 ###  1. Classe `User`:  
 
