@@ -68,7 +68,7 @@ L’interface UserService définit les opérations métiers (logiques de service
 
 En créant cette interface, on laisse la liberté d’implémenter ces méthodes dans différentes classes selon les besoins, tout en garantissant que les signatures des méthodes restent cohérentes dans tout le projet.
   ![Texte alternatif](userservice.JPG) 
-###  Implémentation `UserServiceImpl`:  
+###  - Implémentation `UserServiceImpl`:  
 La classe UserServiceImpl est l’implémentation concrète de l’interface UserService définie précédemment. Annotée avec @Service, elle est automatiquement détectée par Spring comme un composant de service, ce qui permet de l’injecter dans d’autres parties de l’application. L’annotation @Transactional garantit que toutes les opérations réalisées dans ses méthodes sont exécutées dans une seule transaction, ce qui évite les incohérences de données en cas d’erreur pendant l'exécution.  
 
 Cette classe repose sur deux dépendances injectées via le constructeur grâce à @AllArgsConstructor de Lombok : UserRepository et RoleRepository. Ces deux objets permettent d’interagir avec la base de données pour effectuer les opérations liées aux entités User et Role.  
@@ -81,6 +81,12 @@ Cette classe repose sur deux dépendances injectées via le constructeur grâce 
 Ainsi, UserServiceImpl encapsule la logique métier de gestion des utilisateurs et des rôles tout en déléguant l’accès aux données aux repositories.
   ![Texte alternatif](userservice1.JPG) 
   ![Texte alternatif](userservice2.JPG) 
+
+## --  Classe Principale `JpaWiaApplication`:
+Cette classe représente le point d'entrée principal de l'application Spring Boot. Annotée avec @SpringBootApplication, elle configure automatiquement tous les composants nécessaires au démarrage de l'application. La méthode main() lance l'application grâce à SpringApplication.run(). En plus de cela, la méthode start() annotée avec @Bean retourne un CommandLineRunner, une interface permettant d'exécuter du code automatiquement au démarrage de l'application. À l’intérieur de cette méthode, on crée deux utilisateurs (user1 et admin) avec des mots de passe, puis on crée trois rôles (STUDENT, USER, ADMIN) à l’aide du service UserService. Ensuite, des rôles sont assignés aux utilisateurs : user1 reçoit les rôles STUDENT et USER, tandis que admin reçoit les rôles USER et ADMIN. Ce code permet donc d'initialiser automatiquement des données de test dès le lancement de l’application, ce qui est très utile pour les phases de développement.
+  ![Texte alternatif](app1.JPG) 
+  ![Texte alternatif](app2.JPG) 
+
 
 
   - Résultat Attendu
