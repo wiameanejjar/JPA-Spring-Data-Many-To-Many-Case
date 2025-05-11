@@ -42,6 +42,6 @@ La relation entre les utilisateurs et les rôles est modélisée à l’aide de 
    - roleName : le nom du rôle (comme "ADMIN", "STUDENT", etc.). Ce champ est unique (@Column(unique=true)), ce qui empêche l’insertion de doublons.  
 
 La relation entre les rôles et les utilisateurs est définie par l’annotation @ManyToMany(fetch = FetchType.EAGER), ce qui indique qu’un rôle peut être attribué à plusieurs utilisateurs et qu’un utilisateur peut avoir plusieurs rôles. Le paramètre fetch = FetchType.EAGER permet de charger immédiatement les utilisateurs liés à un rôle, lors de la récupération du rôle depuis la base. Par défaut, cette relation bidirectionnelle est matérialisée sans @JoinTable, donc JPA gère la table intermédiaire automatiquement.
-
+  ![Texte alternatif](roleclass.JPG) 
 
 
