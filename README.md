@@ -21,4 +21,5 @@ Le projet est structuré selon les bonnes pratiques de Spring Boot :
 - Classe principale : JpaWiaApplication.
   
   ![img](structure.JPG)
+## 📄 Explication détaillée des Classes
 
