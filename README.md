@@ -92,7 +92,13 @@ Ainsi, UserServiceImpl regroupe la logique métier de gestion des utilisateurs e
   ![Texte alternatif](userserviceImpl2.JPG) 
   ![Texte alternatif](userserviceImpl3.JPG) 
 
-## --  Classe Principale `JpaWiaApplication`:
+## Web:
+###  - Classe `UserController`:
+La classe UserController est un contrôleur REST qui permet d’exposer les services liés à l’entité User via des endpoints HTTP. Annotée avec @RestController, elle est automatiquement détectée par Spring pour gérer les requêtes web. Elle utilise l’annotation @Autowired pour injecter automatiquement une instance de UserService, qui contient la logique métier liée aux utilisateurs. La méthode user(@PathVariable String username) est mappée à l’URL /users/{username} grâce à l’annotation @GetMapping, ce qui signifie qu’elle est appelée lorsqu’une requête GET contenant un nom d’utilisateur est reçue. Cette méthode extrait le nom d’utilisateur de l’URL, utilise la méthode findUserByUserName() du service pour récupérer l’utilisateur correspondant depuis la base de données, puis retourne l’objet User en réponse, généralement sous forme de JSON. Ce contrôleur joue donc un rôle essentiel dans l’interaction entre le client et la couche service de l’application.
+
+![Texte alternatif](usercontroller.JPG) 
+
+## Classe Principale `JpaWiaApplication`:
 Cette classe représente le point d'entrée principal de l'application Spring Boot. Annotée avec @SpringBootApplication, elle configure automatiquement tous les composants nécessaires au démarrage de l'application. La méthode main() lance l'application grâce à SpringApplication.run(). En plus de cela, la méthode start() annotée avec @Bean retourne un CommandLineRunner, une interface permettant d'exécuter du code automatiquement au démarrage de l'application. À l’intérieur de cette méthode, on crée deux utilisateurs (user1 et admin) avec des mots de passe, puis on crée trois rôles (STUDENT, USER, ADMIN) à l’aide du service UserService. Ensuite, des rôles sont assignés aux utilisateurs : user1 reçoit les rôles STUDENT et USER, tandis que admin reçoit les rôles USER et ADMIN. Ce code permet donc d'initialiser automatiquement des données de test dès le lancement de l’application, ce qui est très utile pour les phases de développement.
   ![Texte alternatif](app1.JPG) 
   ![Texte alternatif](app2.JPG) 
