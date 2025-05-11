@@ -79,10 +79,15 @@ Cette classe repose sur deux dépendances injectées via le constructeur grâce 
     - addRoleToUser(String username, String roleName) : attribue un rôle à un utilisateur en ajoutant le rôle dans la liste des rôles de l’utilisateur, et l’utilisateur dans la liste des utilisateurs du rôle (relation bidirectionnelle).
 
 Ainsi, UserServiceImpl encapsule la logique métier de gestion des utilisateurs et des rôles tout en déléguant l’accès aux données aux repositories.
-  ![Texte alternatif](userrepository.JPG) 
+  ![Texte alternatif](userservice1.JPG) 
+  ![Texte alternatif](userservice2.JPG) 
 
 
-
+  - Résultat Attendu
+Au lancement de l’application :
+    - Les utilisateurs et rôles sont insérés automatiquement.
+    - Les relations entre utilisateurs et rôles sont établies.
+    - On peut visualiser les tables via l’interface H2 (/h2-console), avec le JDBC URL jdbc:h2:mem:users_db.
 
 
 
