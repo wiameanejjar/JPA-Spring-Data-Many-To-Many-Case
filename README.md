@@ -120,6 +120,7 @@ Au lancement de l’application :
     - Les utilisateurs et rôles sont insérés automatiquement.
     - Les relations entre utilisateurs et rôles sont établies.
     - On peut visualiser les tables via l’interface H2 (/h2-console), avec le JDBC URL jdbc:h2:mem:users_db.
+     ![Texte alternatif](configuration.JPG)
 
 
  ## - Conclusion
