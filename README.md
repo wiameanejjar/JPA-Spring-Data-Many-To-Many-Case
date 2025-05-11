@@ -26,10 +26,10 @@ Le projet est structuré selon les bonnes pratiques de Spring Boot :
 ###  1. Classe `User`:  
 
 La classe User représente une entité JPA (Java Persistence API) correspondant à la table USERS dans la base de données. Elle utilise les annotations JPA pour la persistance, Lombok pour la génération automatique de code standard, et Jackson pour gérer la sérialisation JSON. Grâce à l’annotation @Entity, cette classe est automatiquement reconnue par JPA comme une entité persistante. L’annotation @Table(name = "USERS") permet de spécifier explicitement le nom de la table à utiliser en base de données.
- - La classe contient trois attributs principaux :
-       - userId est la clé primaire de type String, marquée avec l’annotation @Id, ce qui permet d’identifier de manière unique chaque utilisateur dans la table.
-       - userName correspond au nom de l’utilisateur. Il est annoté avec @Column(name = "USER_NAME", unique = true, length = 20) pour indiquer que cette colonne doit être unique dans la base de données et que sa taille maximale est de 20 caractères.
-       - password est le mot de passe de l’utilisateur. Il est annoté avec @JsonProperty(access = JsonProperty.Access.WRITE_ONLY), ce qui signifie que ce champ ne sera pas inclus dans les réponses JSON (lecture interdite), mais pourra être utilisé lors des envois (écriture autorisée uniquement). Cela permet de renforcer la sécurité en évitant de divulguer le mot de passe dans les échanges de données JSON.  
+ - La classe contient trois attributs principaux :  
+       - userId est la clé primaire de type String, marquée avec l’annotation @Id, ce qui permet d’identifier de manière unique chaque utilisateur dans la table.  
+       - userName correspond au nom de l’utilisateur. Il est annoté avec @Column(name = "USER_NAME", unique = true, length = 20) pour indiquer que cette colonne doit être unique dans la base de données et que sa taille maximale est de 20 caractères.  
+       - password est le mot de passe de l’utilisateur. Il est annoté avec @JsonProperty(access = JsonProperty.Access.WRITE_ONLY), ce qui signifie que ce champ ne sera pas inclus dans les réponses JSON (lecture interdite), mais pourra être utilisé lors des envois (écriture autorisée uniquement). Cela permet de renforcer la sécurité en évitant de divulguer le mot de passe dans les échanges de données JSON.    
 La relation entre les utilisateurs et les rôles est modélisée à l’aide de l’annotation @ManyToMany. Elle indique qu’un utilisateur peut avoir plusieurs rôles et qu’un rôle peut être associé à plusieurs utilisateurs.
   - L’attribut mappedBy = "users" signifie que cette relation est gérée du côté de l’entité Role via l’attribut users.
   - fetch = FetchType.EAGER indique que la liste des rôles associés sera automatiquement chargée en même temps que l’utilisateur.
