@@ -87,6 +87,17 @@ Cette classe représente le point d'entrée principal de l'application Spring Bo
   ![Texte alternatif](app1.JPG) 
   ![Texte alternatif](app2.JPG) 
 
+## ⚙️ Configuration (`application.properties`):
+Ce fichier application.properties contient les paramètres de configuration de l’application Spring Boot, en particulier pour la connexion à la base de données et le comportement de JPA/Hibernate.
+  - server.port=8083 indique que l’application web sera accessible sur le port 8083.
+  - La ligne spring.datasource.url=jdbc:mysql://localhost:3306/USERS_DB?createDatabaseIfNotExist=true configure la connexion à une base de données MySQL nommée USERS_DB, qui sera créée automatiquement si elle n'existe pas.
+  - spring.datasource.username=root et spring.datasource.password= spécifient les identifiants de connexion à la base de données (ici, l'utilisateur root sans mot de passe).
+  - spring.jpa.hibernate.ddl-auto=create indique à Hibernate de recréer les tables de la base de données à chaque démarrage de l’application, ce qui est utile en phase de développement.
+  - spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MariaDBDialect informe Hibernate du dialecte SQL à utiliser, ici adapté à MariaDB (et compatible avec MySQL).
+  - spring.jpa.show-sql=true permet d'afficher les requêtes SQL générées par Hibernate dans la console, pratique pour le débogage.
+    ![Texte alternatif](configuration.JPG) 
+
+
 
 
   - Résultat Attendu
