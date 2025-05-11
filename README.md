@@ -44,14 +44,15 @@ La relation entre les utilisateurs et les rôles est modélisée à l’aide de 
 
   ![Texte alternatif](classuser.JPG)  
   ###  2. Classe `Role`:
-  Cette classe est une entité JPA représentant la table Role dans la base de données contenant les rôles des utilisateurs (comme "ADMIN", "USER", etc.). Elle est annotée avec @Entity pour signaler à JPA qu’il s’agit d’une entité persistante, et utilise les annotations Lombok @Data, @NoArgsConstructor, et @AllArgsConstructor pour générer automatiquement les méthodes de base (accesseurs, constructeurs, toString, etc.).  
-- L’entité contient trois champs principaux :  
-   - id : un identifiant unique de type Long, généré automatiquement par la base grâce à l’annotation @GeneratedValue(strategy = GenerationType.IDENTITY). Il sert de clé primaire.
-   - desc : une description textuelle du rôle (cet attribut est facultative).  
-   - roleName : le nom du rôle (comme "ADMIN", "STUDENT", etc.). Ce champ est unique (@Column(unique=true)), ce qui empêche l’insertion de doublons.  
-
-La relation entre les rôles et les utilisateurs est définie par l’annotation @ManyToMany(fetch = FetchType.EAGER), ce qui indique qu’un rôle peut être attribué à plusieurs utilisateurs et qu’un utilisateur peut avoir plusieurs rôles. Le paramètre fetch = FetchType.EAGER permet de charger immédiatement les utilisateurs liés à un rôle, lors de la récupération du rôle depuis la base. Par défaut, cette relation bidirectionnelle est matérialisée sans @JoinTable, donc JPA gère la table intermédiaire automatiquement.
-  ![Texte alternatif](roleclass.JPG) 
+  Cette classe est une entité JPA qui représente la table Role  dans la base de données, utilisée pour gérer les autorisations des utilisateurs (comme "ADMIN", "USER", etc.). Annotée avec @Entity, elle est persistée automatiquement par JPA. Elle utilise Lombok (@Data, @NoArgsConstructor, @AllArgsConstructor) pour générer automatiquement les méthodes standards.   
+  La classe contient trois attributs :
+   - id, une clé primaire de type Long générée automatiquement.
+   - desc, une description facultative du rôle.
+   - roleName, le nom du rôle, unique et limité à 20 caractères.
+   
+La relation entre Role et User est définie par @ManyToMany(fetch = FetchType.EAGER), indiquant qu’un rôle peut être partagé entre plusieurs utilisateurs et inversement.  
+L’annotation @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) empêche la liste des utilisateurs d’être exposée dans les réponses JSON, et @ToString.Exclude évite les boucles infinies lors de l’affichage de l’objet.
+  ![Texte alternatif](role.JPG) 
 ## 🗂️ Repositories
 ### -  `RoleRepository` : 
 Cette classe `RoleRepository`  est une interface qui permet d’accéder aux données de l’entité Role en interagissant avec la base de données. Elle étend JpaRepository<Role, Long>, ce qui signifie qu’elle hérite automatiquement de plusieurs méthodes prédéfinies comme save(), findAll(), findById(), deleteById(), etc., sans avoir besoin de les réécrire. Cela simplifie énormément la gestion des opérations CRUD (Créer, Lire, Mettre à jour, Supprimer).  
