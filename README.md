@@ -18,4 +18,5 @@ Le projet est structuré selon les bonnes pratiques de Spring Boot :
 - entities: contient les classes User et Role.  
 - repositories: interfaces de persistance avec Spring Data JPA.  
 - service: interface et implémentation des services métier.  
-- Classe principale : JpaWiaApplication.  
+- Classe principale : JpaWiaApplication.
+  
