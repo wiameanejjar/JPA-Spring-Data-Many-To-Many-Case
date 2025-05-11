@@ -17,7 +17,8 @@ Le projet est structuré selon les bonnes pratiques de Spring Boot :
 
 - entities: contient les classes User et Role.  
 - repositories: interfaces de persistance avec Spring Data JPA.  
-- service: interface et implémentation des services métier.  
+- service: interface et implémentation des services métier.
+- web : contient le contrôleur UserController, qui gère les requêtes HTTP liées aux utilisateurs.
 - Classe principale : JpaFsApplication.
   
   ![img](new.JPG)
