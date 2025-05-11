@@ -98,10 +98,11 @@ La classe UserController est un contrôleur REST qui permet d’exposer les serv
 
 ![Texte alternatif](usercontroller.JPG) 
 
-## Classe Principale `JpaWiaApplication`:
-Cette classe représente le point d'entrée principal de l'application Spring Boot. Annotée avec @SpringBootApplication, elle configure automatiquement tous les composants nécessaires au démarrage de l'application. La méthode main() lance l'application grâce à SpringApplication.run(). En plus de cela, la méthode start() annotée avec @Bean retourne un CommandLineRunner, une interface permettant d'exécuter du code automatiquement au démarrage de l'application. À l’intérieur de cette méthode, on crée deux utilisateurs (user1 et admin) avec des mots de passe, puis on crée trois rôles (STUDENT, USER, ADMIN) à l’aide du service UserService. Ensuite, des rôles sont assignés aux utilisateurs : user1 reçoit les rôles STUDENT et USER, tandis que admin reçoit les rôles USER et ADMIN. Ce code permet donc d'initialiser automatiquement des données de test dès le lancement de l’application, ce qui est très utile pour les phases de développement.
-  ![Texte alternatif](app1.JPG) 
-  ![Texte alternatif](app2.JPG) 
+## Classe Principale `JpaFsApplication`:
+La classe JpaFsApplication constitue le point d’entrée principal de l’application Spring Boot. Annotée avec @SpringBootApplication, elle active la configuration automatique de Spring. La méthode main() lance l'application via SpringApplication.run(). La méthode start(), annotée avec @Bean, retourne un CommandLineRunner, ce qui permet d’exécuter automatiquement un bloc de code au démarrage de l’application. Ce bloc initialise deux utilisateurs (user1 et admin) avec un mot de passe, puis crée trois rôles (STUDENT, USER et ADMIN). Ensuite, ces rôles sont affectés aux utilisateurs : user1 reçoit les rôles STUDENT et USER, tandis que admin reçoit USER et ADMIN. Enfin, le code tente d’authentifier user1 avec son mot de passe, et en cas de succès, affiche son identifiant, nom d’utilisateur et les rôles associés.  
+Ce mécanisme d’initialisation est pratique pour tester ou démarrer l’application avec des données par défaut.
+  ![Texte alternatif](jpa1.JPG) 
+  ![Texte alternatif](jpa2.JPG) 
 
 ## ⚙️ Configuration (`application.properties`):
 Ce fichier application.properties contient les paramètres de configuration de l’application Spring Boot, en particulier pour la connexion à la base de données et le comportement de JPA/Hibernate.
