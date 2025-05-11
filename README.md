@@ -42,7 +42,7 @@ La relation entre les utilisateurs et les rôles est modélisée à l’aide de 
 
 
 
-  ![Texte alternatif](userclass.JPG)  
+  ![Texte alternatif](classuser.JPG)  
   ###  2. Classe `Role`:
   Cette classe est une entité JPA représentant la table Role dans la base de données contenant les rôles des utilisateurs (comme "ADMIN", "USER", etc.). Elle est annotée avec @Entity pour signaler à JPA qu’il s’agit d’une entité persistante, et utilise les annotations Lombok @Data, @NoArgsConstructor, et @AllArgsConstructor pour générer automatiquement les méthodes de base (accesseurs, constructeurs, toString, etc.).  
 - L’entité contient trois champs principaux :  
